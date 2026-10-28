@@ -49,7 +49,7 @@ def get_extensions():
     source_cuda = glob.glob(os.path.join(extensions_dir, "**", "*.cu"), recursive=True)
     extension = CppExtension
 
-    extra_compile_args = {"cxx": ["-std=c++17"]}
+    extra_compile_args = {}
     define_macros = []
     include_dirs = [extensions_dir]
 
@@ -78,8 +78,6 @@ def get_extensions():
             "-D__CUDA_NO_HALF_CONVERSIONS__",
             "-D__CUDA_NO_HALF2_OPERATORS__",
         ]
-        if os.name != "nt":
-            nvcc_args.append("-std=c++17")
 
         if not is_rocm:
             # CUDA 13.0+ compatibility flags for pulsar.
